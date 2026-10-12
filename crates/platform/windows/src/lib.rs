@@ -52,7 +52,7 @@ fn read_host() -> WindowsInfo {
     // `GetVersionExW` is deprecated but still the only one callable without
     // linking `ntdll`; the shim returns a zeroed struct on failure, which the
     // defaults above already cover.
-    let ok = unsafe { GetVersionExW(&mut info) }.as_bool();
+    let ok = unsafe { GetVersionExW(&mut info) }.is_ok();
     if !ok {
         tracing::debug!("GetVersionExW failed; reporting unknown Windows version");
     }

@@ -813,6 +813,7 @@ These are the rules that keep the workspace cross-compiling and the README's cla
 | --- | --- |
 | `web-sys` "no method named `class_list`/`style`/`head`" | `web-sys` generates a method only when its feature is on. Add the feature to the `web-sys` list in the root `Cargo.toml`. |
 | Android build fails to find the linker/`cc` | NDK r23+ removed the bare `<arch>-linux-android-clang` symlinks. `source scripts/android-env.sh` (exports `CARGO_TARGET_*_LINKER`, `CC_*`, `CXX_*`, `AR_*`). |
+| A `platform-windows` (or `platform-macos`) error appears only when you target that OS, while `cargo check --workspace` on Linux is green | Desktop code sits behind `#[cfg(target_os = "windows")]`, so a Linux host never type-checks it. Cross-**check** without a linker: `rustup target add x86_64-pc-windows-msvc` then `cargo check --workspace --target x86_64-pc-windows-msvc`. Producing a real `.exe` (linking) still needs MinGW-w64 via `scripts/build-windows.sh`, or a Windows host. |
 | `android_main` code is not type-checked in the editor | rust-analyzer analyzes for the host. Set `rust-analyzer.cargo.target = "aarch64-linux-android"` in your **uncommitted** `.vscode/settings.json`. |
 | Two incompatible `JNIEnv` types | Two `jni` versions in the graph. `jni = "0.22"` must match what `android-activity` 0.6 resolves to. |
 | `uuid`/`getrandom` fails on wasm | Entropy needs the `js` backend: `getrandom { features = ["js"] }` and `uuid { features = ["v4","serde","js"] }` for the wasm graph (already declared in `apps/example/Cargo.toml`). |

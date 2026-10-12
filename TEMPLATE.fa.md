@@ -818,6 +818,7 @@ impl Badge {
 | --- | --- |
 | `web-sys` «no method named `class_list`/`style`/`head`» | `web-sys` یک متد را فقط وقتی تولید می‌کند که فیچرش روشن باشد. فیچر را به لیست `web-sys` در `Cargo.toml` ریشه اضافه کن. |
 | بیلد اندروید linker/`cc` پیدا نمی‌کند | NDK r23+ سیم‌لینک‌های خام `<arch>-linux-android-clang` را حذف کرد. `source scripts/android-env.sh` (بیان‌کنندهٔ `CARGO_TARGET_*_LINKER`، `CC_*`، `CXX_*`، `AR_*`). |
+| لایهٔ ویندوز فقط هنگام هدف‌گیری ویندوز خطای `cargo check` می‌دهد، ولی `cargo check --workspace` روی لینوکس سالم است | کد دسکتاپ پشت `#[cfg(target_os = "windows")]` است، پس میزبان لینوکسی آن را تایپ‌چک نمی‌کند. بدون لینکر کراس‌چک کن: `rustup target add x86_64-pc-windows-msvc` و سپس `cargo check --workspace --target x86_64-pc-windows-msvc`. ساخت خروجی واقعی (`.exe`) همچنان به MinGW-w64 (`scripts/build-windows.sh`) یا میزبان ویندوز نیاز دارد. |
 | کد `android_main` در ادیتور type-check نمی‌شود | rust-analyzer برای میزبان تحلیل می‌کند. در `.vscode/settings.json` **کامیت‌نشدهٔ** خودت `rust-analyzer.cargo.target = "aarch64-linux-android"` بگذار. |
 | دو تایپ ناسازگار `JNIEnv` | دو نسخهٔ `jni` در گراف. `jni = "0.22"` باید با آنچه `android-activity` 0.6 resolve می‌کند یکی باشد. |
 | خطای `uuid`/`getrandom` روی wasm | آنتروپی به بک‌اند `js` نیاز دارد: `getrandom { features = ["js"] }` و `uuid { features = ["v4","serde","js"] }` برای گراف wasm (از قبل در `apps/example/Cargo.toml` اعلام شده). |
