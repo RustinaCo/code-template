@@ -6,6 +6,7 @@
 هم‌بسته در همان ورک‌اسپیس.
 
 > 🇬🇧 **English version:** [README.md](README.md)
+> 📘 **راهنمای کامل توسعه‌دهنده و هوش مصنوعی:** [TEMPLATE.fa.md](TEMPLATE.fa.md) · [English guide](TEMPLATE.md)
 
 ---
 
@@ -44,6 +45,8 @@ Rustinaz یک بک‌اند کوچک و کاملاً راست هم در همان
 ## فهرست مطالب
 
 - [Rustinaz چیست](#rustinaz-چیست)
+- [📘 راهنمای کامل توسعه‌دهنده و هوش مصنوعی](TEMPLATE.fa.md)
+- [📘 Complete developer & AI guide (English)](TEMPLATE.md)
 - [ویژگی‌ها](#ویژگیها)
 - [دریافت کد](#دریافت-کد)
 - [پیش‌نیازها](#پیشنیازها)
@@ -433,10 +436,11 @@ code-template/
 جهت وابستگی کاملاً یک‌طرفه است:
 
 ```
-apps/example  ->  ui  ->  shared  <-  apps/server
-       |           |        ^
-       |           +-> platform/linux, /windows, /macos, /android, /ios, /web
-       +-> resources
+apps/example  ->  ui, resources, platform/*      (platform/* -> shared, ui)
+apps/server   ->  shared
+ui            ->  shared
+resources     ->  shared
+build-config  ->  shared
 ```
 
 `shared` و `ui` هیچ‌وقت به crate پلتفرمی وابسته نیستند؛ برای همین `cargo check --workspace` روی

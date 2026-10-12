@@ -11,6 +11,7 @@ the same workspace.
 [![Licence](https://img.shields.io/badge/licence-MIT%20OR%20Apache--2.0-green)](#licence)
 
 > 🇮🇷 **نسخهٔ فارسیٔ این راهنما:** [README.fa.md](README.fa.md)
+> 📘 **Complete developer & AI guide:** [TEMPLATE.md](TEMPLATE.md) · [راهنمای کامل (فارسی)](TEMPLATE.fa.md)
 
 ---
 
@@ -49,6 +50,8 @@ per-platform crates.** One language, one build system, one UI.
 ## Table of contents
 
 - [What Rustinaz is](#what-rustinaz-is)
+- [📘 Complete developer & AI guide (English)](TEMPLATE.md)
+- [📘 راهنمای کامل (فارسی)](TEMPLATE.fa.md)
 - [Highlights](#highlights)
 - [Get the code](#get-the-code)
 - [Prerequisites](#prerequisites)
@@ -516,10 +519,11 @@ rust-crossplatform-template/
 The dependency direction is strictly one way:
 
 ```
-apps/example  ->  ui  ->  shared  <-  apps/server
-       |           |        ^
-       |           +-> platform/linux, /windows, /macos, /android, /ios, /web
-       +-> resources
+apps/example  ->  ui, resources, platform/*      (platform/* -> shared, ui)
+apps/server   ->  shared
+ui            ->  shared
+resources     ->  shared
+build-config  ->  shared
 ```
 
 `shared` and `ui` never depend on a platform crate, which is why `cargo check --workspace`
